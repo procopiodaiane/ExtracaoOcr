@@ -4,19 +4,14 @@ from PIL import Image
 from docx import Document
 import os
 
-# Configure o caminho para o executável do Tesseract
+# Caminho para o executável do Tesseract
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
-# Configurar o diretório tessdata
+# Diretório tessdata
 os.environ['TESSDATA_PREFIX'] = r'C:\\Program Files\\Tesseract-OCR\\tessdata'
 
 def extract_text_from_pdf(pdf_path, output_docx):
-    """
-    Realiza OCR em um PDF digitalizado e salva a transcrição em um arquivo .docx.
 
-    :param pdf_path: Caminho para o arquivo PDF de entrada.
-    :param output_docx: Caminho para o arquivo .docx de saída.
-    """
     # Abrir o PDF
     pdf_document = fitz.open(pdf_path)
     
@@ -35,7 +30,7 @@ def extract_text_from_pdf(pdf_path, output_docx):
 
         # Realizar OCR na imagem
         image = Image.open(image_path)
-        text = pytesseract.image_to_string(image, lang='por')  # Use 'eng' para inglês ou 'por' para português
+        text = pytesseract.image_to_string(image, lang='por')  # Língua do documento
 
         # Adicionar número da página ao documento
         doc.add_paragraph(f"Página {page_number + 1}")
